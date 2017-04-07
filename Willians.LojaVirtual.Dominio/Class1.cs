@@ -7,6 +7,6 @@ using System.Threading.Tasks;
 namespace Willians.LojaVirtual.Dominio
 {
     public class Class1
-    {
+    { 
     }
 }
