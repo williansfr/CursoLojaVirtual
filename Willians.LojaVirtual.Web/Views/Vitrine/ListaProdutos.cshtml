@@ -1,51 +1,14 @@
-﻿@model IEnumerable<Willians.LojaVirtual.Dominio.Entidade.Produto>
+﻿@using Willians.LojaVirtual.Web.HtlmHelpers;
+@model Willians.LojaVirtual.Web.Models.ProdutoViewModel
 
-@{
-    ViewBag.Title = "ListaProdutos";
+@foreach (var item in Model.Produtos) {
+    <div>
+        <h3>@item.Nome</h3>
+        @item.Descricao
+        <h3>@item.Preco.ToString("c")</h3>
+    </div>
 }
 
-<h2>ListaProdutos</h2>
+@Html.LinkDePaginas(Model.paginacao, x => Url.Action("ListaProdutos", new { pagina = x}))
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Nome)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Descricao)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Preco)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Categoria)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nome)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Descricao)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Preco)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Categoria)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ProdutoId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ProdutoId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ProdutoId })
-        </td>
-    </tr>
-}
-
-</table>
