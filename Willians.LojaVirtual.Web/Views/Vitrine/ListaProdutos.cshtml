@@ -2,13 +2,10 @@
 @model Willians.LojaVirtual.Web.Models.ProdutoViewModel
 
 @foreach (var item in Model.Produtos) {
-    <div>
-        <h3>@item.Nome</h3>
-        @item.Descricao
-        <h3>@item.Preco.ToString("c")</h3>
-    </div>
+    @Html.Partial("ProdutosDetalhes", item)
 }
 
-@Html.LinkDePaginas(Model.paginacao, x => Url.Action("ListaProdutos", new { pagina = x}))
-
+<div class="btn-group pull-right">
+    @Html.LinkDePaginas(Model.paginacao, x => Url.Action("ListaProdutos", new { pagina = x }))
+</div>
 
