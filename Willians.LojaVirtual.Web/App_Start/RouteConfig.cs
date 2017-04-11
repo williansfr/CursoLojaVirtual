@@ -15,14 +15,34 @@ namespace Willians.LojaVirtual.Web
 
             routes.MapRoute(
                 name: null,
-                url: "Pagina{pagina}",
-                defaults: new { controller = "Vitrine", action = "ListaProdutos"}
-            );
+                url: "",
+                defaults: new { controller = "Vitrine", action = "ListaProdutos", categoriaSelecionada = (string)null, pagina = 1 });
 
             routes.MapRoute(
-                name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Vitrine", action = "ListaProdutos", id = UrlParameter.Optional }
+                name: null,
+                url: "Pagina{pagina}",
+                defaults: new { controller = "Vitrine", action = "ListaProdutos", categoriaSelecionada = (string)null },
+                constraints: new { pagina = @"\d+" });
+
+            routes.MapRoute(
+                name: null,
+                url: "{categoriaSelecionada}",
+                defaults: new { controller = "Vitrine", action = "ListaProdutos", pagina = 1 });
+
+            routes.MapRoute(
+                name: null,
+                url: "{categoriaSelecionada}/Pagina{pagina}",
+                defaults: new { controller = "Vitrine", action = "ListaProdutos" },
+                constraints: new { pagina = @"\d+" });
+
+            routes.MapRoute(
+                        name: null,
+                        url: "{controller}/{action}");
+
+            routes.MapRoute(
+                        name: "Default",
+                        url: "{controller}/{action}/{id}",
+                        defaults: new { controller = "Vitrine", action = "ListaProdutos", id = UrlParameter.Optional }
             );
         }
     }

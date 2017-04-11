@@ -10,7 +10,7 @@ namespace Willians.LojaVirtual.Web.HtlmHelpers
 {
     public static class PaginacaoHelpers
     {
-        public static MvcHtmlString LinkDePaginas (this HtmlHelper html, Paginacao paginacao, Func<int, string> paginaUrl)
+        public static MvcHtmlString LinkDePaginas(this HtmlHelper html, Paginacao paginacao, Func<int, string> paginaUrl)
         {
             StringBuilder resultado = new StringBuilder();
 

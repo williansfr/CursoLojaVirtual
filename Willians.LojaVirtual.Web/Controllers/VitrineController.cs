@@ -15,9 +15,11 @@ namespace Willians.LojaVirtual.Web.Controllers
         public int ItensPorPagina = 4;
 
         // GET: Produtos
-        public ViewResult ListaProdutos(int pagina = 1)
+        public ViewResult ListaProdutos(int pagina = 1, string categoriaSelecionada = null)
         {
-            var produtos = _produtoRepositorio.Produtos.OrderBy(p => p.Descricao)
+            var produtos = _produtoRepositorio.Produtos
+                            .Where(p => (categoriaSelecionada == null || p.Categoria == categoriaSelecionada))
+                            .OrderBy(p => p.Descricao)
                             .Skip((pagina - 1) * ItensPorPagina)
                             .Take(ItensPorPagina);
 
@@ -25,9 +27,12 @@ namespace Willians.LojaVirtual.Web.Controllers
             model.paginacao = new Paginacao();
             model.paginacao.PaginaAtual = pagina;
             model.paginacao.ItensPorPagina = ItensPorPagina;
-            model.paginacao.ItensTotal = _produtoRepositorio.Produtos.Count();
+            model.paginacao.ItensTotal = _produtoRepositorio.Produtos
+                                            .Count(p => (categoriaSelecionada == null || p.Categoria == categoriaSelecionada));
 
             model.Produtos = produtos;
+
+            model.CategoriaAtual = categoriaSelecionada;
 
             return View(model);
         }

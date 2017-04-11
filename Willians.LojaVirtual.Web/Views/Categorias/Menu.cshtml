@@ -1,0 +1,25 @@
+﻿@model IEnumerable<string>
+
+@Html.ActionLink(linkText: "Todos os Produtos",
+                 actionName: "ListaProdutos",
+                 controllerName: "Vitrine",
+                 routeValues: null,
+                 htmlAttributes: new { @class = "btn btn-block btn-default btn-lg" })
+
+@foreach (var item in Model)
+{
+    var objetoRota = new
+    {
+        controller = "Vitrine",
+        action = "ListaProdutos",
+        categoriaSelecionada = item,
+        pagina = 1
+    };
+
+    string marcaSelecionada = item == ViewBag.CategoriaSelecionada ? " btn-primary" : " ";
+
+    var objetoAtributosBotoes = new { @class = string.Format("btn btn-block btn-default btn-lg {0} ", marcaSelecionada) };
+
+    @Html.RouteLink(item, objetoRota, objetoAtributosBotoes);
+    
+}

@@ -6,6 +6,6 @@
 }
 
 <div class="btn-group pull-right">
-    @Html.LinkDePaginas(Model.paginacao, x => Url.Action("ListaProdutos", new { pagina = x }))
+    @Html.LinkDePaginas(Model.paginacao, x => Url.Action("ListaProdutos", new { pagina = x, categoriaSelecionada = Model.CategoriaAtual }))
 </div>
 

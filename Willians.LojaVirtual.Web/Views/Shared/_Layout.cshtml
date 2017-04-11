@@ -18,8 +18,10 @@
         <a class="navbar-brand" href="#" >Willians - Seu Esporte é Aqui na Loja</a>        
     </div>
 
-    <div class="panel-body">
-        <div class=col-xs-3 id="Categorias">Minhas Categorias</div>
+    <div class="panel-body panel-success" >
+        <div class=col-xs-3 id="Categorias">
+            @Html.Action("Menu", "Categorias");
+        </div>
         <div class=col-xs-8 id="Produtos">        
             @RenderBody()        
         </div>        
