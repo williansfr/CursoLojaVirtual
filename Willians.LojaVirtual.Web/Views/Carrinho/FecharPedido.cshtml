@@ -2,7 +2,7 @@
 
 @{ 
     ViewBag.Title = "Willians - Fechar Pedido";
-}}
+}
 
 <h2>Fechar o Pedido</h2>
 <p>Digite suas informações abaixo</p>
@@ -20,40 +20,7 @@
 
     <h3>Dados para Entrega</h3>
 
-    <div class="form-group">
-        <label>Cep:</label>
-        @Html.TextBoxFor(d => d.Cep, new { @class = "form-control" })
-    </div>
 
-    <div class="form-group">
-        <label>Endereço:</label>
-        @Html.TextBoxFor(d => d.Endereco, new { @class = "form-control" })
-    </div>
-
-    <div class="form-group">
-        <label>Complemento:</label>
-        @Html.TextBoxFor(d => d.Complemento, new { @class = "form-control" })
-    </div>
-
-    <div class="form-group">
-        <label>Bairro:</label>
-        @Html.TextBoxFor(d => d.Bairro, new { @class = "form-control" })
-    </div>
-
-    <div class="form-group">
-        <label>Cidade:</label>
-        @Html.TextBoxFor(d => d.Cidade, new { @class = "form-control" })
-    </div>
-
-    <div class="form-group">
-        <label>Estado:</label>
-        @Html.TextBoxFor(d => d.Estado, new { @class = "form-control" })
-    </div>
-
-    <div class="form-group">
-        <label>E-Mail:</label>
-        @Html.TextBoxFor(d => d.Email, new { @class = "form-control" })
-    </div>
 
     <h3>Opções</h3>
     <div class="checkbox">
@@ -62,6 +29,18 @@
         </label>
         @Html.TextBoxFor(d => d.Email, new { @class = "form-control" })
     </div>
+
+    @foreach (var propriedade in ViewData.ModelMetadata.Properties)
+    {
+        if (propriedade.PropertyName != "NomeCliente" && propriedade.PropertyName != "EmbrulhaPresente")
+        {
+            <label>
+                @propriedade.DisplayName ?? @propriedade.PropertyName
+            </label>
+
+            @Html.TextBox(propriedade.PropertyName, null, new { @class = "form-control" })
+        }
+    }
 
     <input class="btn btn-primary" type="submit" value="Fechar o Pedido" />
 }
