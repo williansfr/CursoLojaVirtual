@@ -3,5 +3,17 @@
 <div class="well">
     <h3><strong>@Model.Nome</strong></h3>
     <h3><span class="pull-right label label-danger">@Model.Preco.ToString("c")</span></h3>
+
+    @using (Html.BeginForm("Adicionar", "Carrinho"))
+    {
+        <div class="pull-right">
+            @Html.HiddenFor(x => x.ProdutoId)
+            @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+
+            <input type="submit" value="Comprar" class="btn btn-success" />
+ 
+        </div>
+    }
+
     @Model.Descricao
 </div>
