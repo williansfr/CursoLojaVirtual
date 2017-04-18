@@ -8,7 +8,7 @@ namespace Willians.LojaVirtual.Dominio.Entidade
 
         public string Senha = "loading4";
 
-        public bool UsarSsl = false;
+        public bool UsarSsl = true;
 
         public string ServidorSmtp = "smtp.live.com";
 

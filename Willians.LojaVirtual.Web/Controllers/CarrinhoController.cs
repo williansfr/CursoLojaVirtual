@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -68,6 +69,32 @@ namespace Willians.LojaVirtual.Web.Controllers
         public ViewResult FecharPedido()
         {
             return View(new Pedido());
+        }
+
+        [HttpPost]
+        public ViewResult FecharPedido(Pedido pedido)
+        {
+            Carrinho carrinho = ObterCarrinho();
+            EmailConfiguracoes emailConfig = new EmailConfiguracoes();
+            emailConfig.EscreverArquivo = bool.Parse(ConfigurationManager.AppSettings["Email.EscreverArquivo"]);
+
+            EmailPedido emailPedido = new EmailPedido(emailConfig);
+
+            if (!carrinho.ItensDoCarrinho().Any())
+                ModelState.AddModelError("", "Carrinho vazio! \nPedido não pode ser concluído!");
+
+            if (ModelState.IsValid) {
+                emailPedido.ProcessarPedido(carrinho, pedido);
+                carrinho.LimparCarrinho();
+                return View("PedidoConcluido");
+            }
+            else
+                return View(pedido);
+        }
+
+        public ViewResult PedidoConcluido()
+        {
+            return View();
         }
 
     }

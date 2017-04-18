@@ -27,7 +27,7 @@ namespace Willians.LojaVirtual.Dominio.Entidade
             smtp.Host = _emailConfiguracoes.ServidorSmtp;
             smtp.Port = _emailConfiguracoes.ServidorPorta;
             smtp.UseDefaultCredentials = false;
-            smtp.Credentials = new NetworkCredential(_emailConfiguracoes.Usuario, _emailConfiguracoes.ServidorSmtp);
+            smtp.Credentials = new NetworkCredential(_emailConfiguracoes.Usuario, _emailConfiguracoes.Senha);
 
             if (_emailConfiguracoes.EscreverArquivo) {
                 smtp.DeliveryMethod = SmtpDeliveryMethod.SpecifiedPickupDirectory;
@@ -43,10 +43,11 @@ namespace Willians.LojaVirtual.Dominio.Entidade
             foreach (var itens in carrinho.ItensDoCarrinho()) {
                 decimal subTotal = itens.Quantidade * itens.Produto.Preco;
 
-                body.AppendFormat("{0} x {1} SubTotal {2:c}", itens.Quantidade, itens.Produto.Preco, subTotal); 
+                body.AppendFormat("{0} x {1} = SubTotal {2:c} \n", itens.Quantidade, itens.Produto.Preco, subTotal); 
             }
 
-            body.AppendFormat("Valor Total do Pedido: {0:c}", carrinho.ObterValorTotal());
+            body.AppendFormat("Valor Total do Pedido: {0:c} \n", carrinho.ObterValorTotal());
+
             body.AppendLine(new string('-', 10));
             body.AppendLine("Enviar para: ");
             body.AppendLine(pedido.NomeCliente ?? "");
@@ -66,7 +67,7 @@ namespace Willians.LojaVirtual.Dominio.Entidade
                 mail.BodyEncoding = Encoding.GetEncoding("ISO-8859-1");
             }
 
-            smtp.Send(mail);
+           smtp.Send(mail);
         }
     }
 }
