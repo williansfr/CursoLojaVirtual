@@ -34,5 +34,17 @@ namespace Willians.LojaVirtual.Dominio.Repositorio
             }
             _context.SaveChanges();
         }
+
+        public Produto Excluir(int produtoId) {
+            Produto prod = _context.Produtos.Find(produtoId);
+
+            if (prod != null)
+            {
+                _context.Produtos.Remove(prod);
+                _context.SaveChanges();
+            }
+
+            return prod;
+        }
     }
 }
