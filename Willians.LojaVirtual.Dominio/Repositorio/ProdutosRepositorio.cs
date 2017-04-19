@@ -15,5 +15,24 @@ namespace Willians.LojaVirtual.Dominio.Repositorio
         {
             get { return _context.Produtos; } 
         }
+
+        public void Salvar(Produto produto) {
+            if (produto.ProdutoId == 0)
+            {
+                _context.Produtos.Add(produto);
+            } else
+            {
+                Produto prodAlteracao = _context.Produtos.Find(produto.ProdutoId);
+
+                if (prodAlteracao != null)
+                {
+                    prodAlteracao.Nome = produto.Nome;
+                    prodAlteracao.Preco = produto.Preco;
+                    prodAlteracao.Categoria = produto.Categoria;
+                    prodAlteracao.Descricao = produto.Descricao;
+                }
+            }
+            _context.SaveChanges();
+        }
     }
 }
