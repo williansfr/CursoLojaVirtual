@@ -8,6 +8,7 @@ using Willians.LojaVirtual.Dominio.Repositorio;
 
 namespace Willians.LojaVirtual.Web.Areas.Administrativo.Controllers
 {
+    [Authorize]
     public class ProdutoController : Controller
     {
         private ProdutosRepositorio _repositorio;

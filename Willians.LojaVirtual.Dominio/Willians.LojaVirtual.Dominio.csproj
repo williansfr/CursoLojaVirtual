@@ -69,6 +69,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entidade\Administradores.cs" />
     <Compile Include="Entidade\EmailConfiguracoes.cs" />
     <Compile Include="Entidade\EmailPedido.cs" />
     <Compile Include="Entidade\ItensCarrinho.cs" />
