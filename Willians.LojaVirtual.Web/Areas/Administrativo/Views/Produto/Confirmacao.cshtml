@@ -7,7 +7,7 @@
             </div>
             <div class="modal-body">
                 <input type="hidden" />
-                <p>Deseja excluir o produto ?<em><strong>"<span></span>"</strong></em>&hellip;</p>
+                <p>Deseja excluir o produto <em><strong>"<span></span>"</strong></em>&hellip;?</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-success">Confirmar</button>
@@ -15,3 +15,52 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+
+<script>
+    $(function () {
+        // Abrir o Modal
+        $(".btn-xs").click(function (e) {
+            e.preventDefault();
+            var id = this.id;
+            var nome = this.name;
+
+            // Colocar Id no campo Hidden
+
+            $("#deleteModal  .modal-body input[type=hidden]").val(id);
+
+            $("#deleteModal  .modal-body span").text(nome);
+
+            $("#deleteModal").modal('show');
+        })
+
+        $("#deleteModal .modal-footer button").click(function (e) {
+            e.preventDefault();
+            var url = "/Administrativo/Produto/Excluir/";
+            var id = $("#deleteModal  .modal-body input[type=hidden]").val();
+            var rowNum = "#row-" + id;
+
+            $.ajax({
+                url: url,
+                type: 'post',
+                datatype: 'json',
+                data: { produtoId: id },
+                beforeSend: function () {
+                    var loading = "<span><em>Excluindo...</em></span>";
+                    $("#deleteModal  .modal-header h4").after(loading)
+                },
+                success: function () {
+                    $("#deleteModal").modal('hide');
+
+                    $(rowNum).animate({ opacity: 0.0 }, 400, function () {
+                        $(rowNum).remove();
+                    })
+                },
+                complete: function (data) {
+                    $("divexcluir").empty();
+                    $("divexcluir").addClass("alert alert-success");
+                    $("divexcluir").html(data.responseText);
+                }
+            });
+        })
+    });
+</script>
