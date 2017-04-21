@@ -47,18 +47,35 @@ namespace Willians.LojaVirtual.Web.Areas.Administrativo.Controllers
             return View("Alterar", new Produto());
         }
 
+        //[HttpPost]
+        //public ActionResult Excluir(int produtoId)
+        //{
+        //    _repositorio = new ProdutosRepositorio();
+
+        //    Produto prod = _repositorio.Excluir(produtoId);
+
+        //    if (prod != null)
+        //    {
+        //        TempData["mensagem"] = string.Format("{0} excluído com sucesso", prod.Nome);                
+        //    }
+        //    return RedirectToAction("Index");
+
+        //}
+
         [HttpPost]
-        public ActionResult Excluir(int produtoId)
+        public JsonResult Excluir(int produtoId)
         {
+            string mensagem = string.Empty;
+
             _repositorio = new ProdutosRepositorio();
 
             Produto prod = _repositorio.Excluir(produtoId);
 
             if (prod != null)
             {
-                TempData["mensagem"] = string.Format("{0} excluído com sucesso", prod.Nome);                
+                mensagem = string.Format("{0} excluído com sucesso", prod.Nome);
             }
-            return RedirectToAction("Index");
+            return Json(mensagem, JsonRequestBehavior.AllowGet);
 
         }
 
