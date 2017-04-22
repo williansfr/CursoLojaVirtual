@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Willians.LojaVirtual.Dominio.Entidade
 {
-    public class Administradores
+    public class Administrador
     {
         // DataNotations
         [Key]
