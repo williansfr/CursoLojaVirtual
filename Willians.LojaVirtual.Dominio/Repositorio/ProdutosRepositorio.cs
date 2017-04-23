@@ -30,6 +30,8 @@ namespace Willians.LojaVirtual.Dominio.Repositorio
                     prodAlteracao.Preco = produto.Preco;
                     prodAlteracao.Categoria = produto.Categoria;
                     prodAlteracao.Descricao = produto.Descricao;
+                    prodAlteracao.Imagem = produto.Imagem;
+                    prodAlteracao.ImagemMimeType = produto.ImagemMimeType;
                 }
             }
             _context.SaveChanges();

@@ -27,8 +27,8 @@ namespace Willians.LojaVirtual.Dominio.Entidade
         [Required(ErrorMessage = "Digite a Categoria")]
         public string Categoria { get; set; }
 
-        public byte[] Image { get; set; }
+        public byte[] Imagem { get; set; }
 
-        public string ImageMineType { get; set; }
+        public string ImagemMimeType { get; set; }
     }
 }

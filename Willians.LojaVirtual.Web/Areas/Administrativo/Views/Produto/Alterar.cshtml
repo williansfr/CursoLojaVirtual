@@ -13,7 +13,8 @@
         <h3>Alterar - @Model.Nome</h3>
     </div>
 
-    @using (Html.BeginForm("Alterar", "Produto"))
+    @*Informar senão ao criar não irá achar*@
+    @using (Html.BeginForm("Alterar", "Produto", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         <div class="panel-body">
 
@@ -21,26 +22,58 @@
 
             @foreach (var property in ViewData.ModelMetadata.Properties)
             {
-                if (property.PropertyName != "ProdutoId")
+                // if (property.PropertyName != "ProdutoId")
+                //  {
+
+
+                switch (property.PropertyName)
                 {
-                    <div class="form-group">
-                        <label>
-                            @(property.DisplayName ?? property.PropertyName)
-                        </label>
-
-                        @if (property.PropertyName == "Descricao")
-                        {
-                            @Html.TextArea(property.PropertyName, null, new { @class = "form-control", rows = 5 })
-                        }
-                        else
-                        {
-                            @Html.TextBox(property.PropertyName, null, new { @class = "form-control" })
-                        }
-
-                        @Html.ValidationMessage(property.PropertyName)
-                    </div>
+                    case "ProdutoId":
+                    case "Imagem":
+                    case "ImagemMimeType":
+                        break;
+                    default:
+                        <div class="form-group">
+                            <label>
+                                @(property.DisplayName ?? property.PropertyName)
+                            </label>
+                            @if (property.PropertyName == "Descricao")
+                            {
+                                @Html.TextArea(property.PropertyName, null, new { @class = "form-control", rows = 5 })
+                            }
+                            else
+                            {
+                                @Html.TextBox(property.PropertyName, null, new { @class = "form-control" })
+                            }
+                            @Html.ValidationMessage(property.PropertyName)
+                        </div>
+                        break;
                 }
             }
+
+            @*Upload*@
+            <div class="form-group">
+                <div style="position:relative;">
+                    <label>Image</label>
+                    <a class='btn' href='javascript:;'>
+                        Selecione a imagem...
+                        <input type="file" name="Image" size="40" 
+                               style="position:absolute;
+                                       z-index:2;top:0; left:0;filter: alpha(opacity=0); 
+                                       opacity:0; background-color:transparent;color:transparent;" 
+                                        onchange='$("#upload-file-info").html($(this).val());'>
+                    </a>
+                    <span class='label label-info' id="upload-file-info"></span>
+                </div>
+                @if (Model.Imagem == null)
+                {
+                    <div class="form-control-static">Nenhuma imagem</div>
+                }
+                else
+                {
+                    <img class="img-thumbnail" width="120" height="120" src="@Url.Action("ObterImagem", "Produto", new { Model.ProdutoId })" />
+                }
+            </div>
         </div>
 
         <div class="panel-footer">
@@ -52,13 +85,4 @@
 </div>
 
 
-@*@using (Html.BeginForm())
-{
-    // @Html.EditorForModel()
-
-    <input type="submit" value="Salvar" />
-
-    @Html.ActionLink(linkText: "Cancelar e Retornar",
-                     actionName: "Index");
-}*@
 
