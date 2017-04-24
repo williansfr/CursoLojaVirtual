@@ -35,6 +35,10 @@ namespace Willians.LojaVirtual.Web
                 defaults: new { controller = "Vitrine", action = "ListaProdutos" },
                 constraints: new { pagina = @"\d+" });
 
+            routes.MapRoute("ObterImagem",
+                            "Vitrine/ObterImagem/{produtoId}",
+                            new {controller = "Vitrine", action = "ObterImagem", produtoId = UrlParameter.Optional });
+
             routes.MapRoute(
                         name: null,
                         url: "{controller}/{action}");

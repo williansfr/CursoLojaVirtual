@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Willians.LojaVirtual.Dominio.Entidade;
 using Willians.LojaVirtual.Dominio.Repositorio;
 using Willians.LojaVirtual.Web.Models;
 
@@ -35,6 +36,18 @@ namespace Willians.LojaVirtual.Web.Controllers
             model.CategoriaAtual = categoriaSelecionada;
 
             return View(model);
+        }
+
+        public FileContentResult ObterImagem(int produtoId)
+        {
+            _produtoRepositorio = new ProdutosRepositorio();
+            Produto prod = _produtoRepositorio.Produtos.FirstOrDefault(p => p.ProdutoId == produtoId);
+
+            if (prod != null)
+            {
+                return File(prod.Imagem, prod.ImagemMimeType);
+            }
+            return null;
         }
     }
 }
