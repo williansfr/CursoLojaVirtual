@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Optimization;
 using System.Web.Routing;
 using Willians.LojaVirtual.Dominio.Entidade;
+using Willians.LojaVirtual.Web.App_Start;
 using Willians.LojaVirtual.Web.Infraestrutura;
 
 namespace Willians.LojaVirtual.Web
@@ -15,7 +17,9 @@ namespace Willians.LojaVirtual.Web
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-            ModelBinders.Binders.Add(typeof(Carrinho), new CarrinhoModelBinder());
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            ModelBinders.Binders.Add(typeof(Carrinho), new CarrinhoModelBinder());            
         }
     }
 }
