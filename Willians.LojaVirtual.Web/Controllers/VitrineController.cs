@@ -38,6 +38,7 @@ namespace Willians.LojaVirtual.Web.Controllers
             return View(model);
         }
 
+        [Route("Vitrine/ObterImagem/{produtoId}")]
         public FileContentResult ObterImagem(int produtoId)
         {
             _produtoRepositorio = new ProdutosRepositorio();

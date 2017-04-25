@@ -11,8 +11,10 @@ namespace Willians.LojaVirtual.Web
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
-            routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            routes.MapMvcAttributeRoutes();
 
+            routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            
             routes.MapRoute(
                 name: null,
                 url: "",
@@ -35,9 +37,9 @@ namespace Willians.LojaVirtual.Web
                 defaults: new { controller = "Vitrine", action = "ListaProdutos" },
                 constraints: new { pagina = @"\d+" });
 
-            routes.MapRoute("ObterImagem",
-                            "Vitrine/ObterImagem/{produtoId}",
-                            new {controller = "Vitrine", action = "ObterImagem", produtoId = UrlParameter.Optional });
+            //routes.MapRoute("ObterImagem",
+            //                "Vitrine/ObterImagem/{produtoId}",
+            //                new {controller = "Vitrine", action = "ObterImagem", produtoId = UrlParameter.Optional });
 
             routes.MapRoute(
                         name: null,

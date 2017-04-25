@@ -55,14 +55,15 @@ namespace Willians.LojaVirtual.Web.Controllers
             //Carrinho carrinho = ObterCarrinho();
             return PartialView(carrinho);
         }
+
         // GET: Carrinho
-        public RedirectToRouteResult Adicionar(Carrinho carrinho, int produtoId, string returnUrl)
+        public RedirectToRouteResult Adicionar(Carrinho carrinho, int produtoId, int quantidade, string returnUrl)
         {
             Produto produto = _produtoRepositorio.Produtos.FirstOrDefault(d => d.ProdutoId == produtoId);
 
             if (produto != null)
             {
-                carrinho.AdicionarItem(produto, 1);
+                carrinho.AdicionarItem(produto, quantidade);
             }
 
             return RedirectToAction("Index", new { returnUrl });
