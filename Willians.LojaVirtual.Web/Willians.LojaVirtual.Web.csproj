@@ -144,6 +144,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="HtlmHelpers\PaginacaoHelpers.cs" />
+    <Compile Include="Infraestrutura\CarrinhoModelBinder.cs" />
     <Compile Include="Models\CarrinhoViewModel.cs" />
     <Compile Include="Models\Paginacao.cs" />
     <Compile Include="Models\ProdutoViewModel.cs" />
