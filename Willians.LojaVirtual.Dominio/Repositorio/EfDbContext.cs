@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Willians.LojaVirtual.Dominio.Entidade;
+using Willians.LojaVirtual.Dominio.Entidade.Vitrine;
 
 namespace Willians.LojaVirtual.Dominio.Repositorio
 {
@@ -14,6 +15,10 @@ namespace Willians.LojaVirtual.Dominio.Repositorio
         public DbSet<Produto> Produtos { get; set; }
         public DbSet<Administrador> Administradores { get; set; }
         public DbSet<Categoria> Categorias { get; set; }
+        public DbSet<MarcaVitrine> MarcaVitrine { get; set; }
+        public DbSet<ClubesNacionais> ClubesNacionais { get; set; }
+        public DbSet<ClubesInternacionais> ClubesInternacionais { get; set; }
+        public DbSet<Selecoes> Selecoes { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

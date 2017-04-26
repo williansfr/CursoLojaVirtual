@@ -13,7 +13,7 @@ app.iniciarlizar = function () {
     app.ObterMarcas();
     app.ObterClubesNacionais();
     app.ObterClubesInternacionais();
-
+    app.ObterSelecoes();
 
 }
 
@@ -21,12 +21,25 @@ app.iniciarlizar = function () {
 
 //
 
+app.ObterSelecoes = function () {
+ 
+    $.getJSON('menu/obterselecoes', function (data) {
+
+        $(data).each(function () {
+            $("#selecoes").append("<li><a href='/nav/times/" + this.LinhaCodigo + "/" + this.LinhaDescricaoSeo + "'>" + this.LinhaDescricao + "</a></li>");
+        });
+
+    });
+
+}
+
+
 app.ObterClubesNacionais = function () {
 
     $.getJSON('menu/obterclubesnacionais', function (data) {
 
         $(data).each(function () {
-            $("#clubesnacionais").append("<li><a href='/nav/times/" + this.ClubeCodigo + "/" + this.ClubeSeo + "'>" + this.Clube + "</a></li>");
+            $("#clubesnacionais").append("<li><a href='/nav/times/" + this.LinhaCodigo + "/" + this.LinhaDescricaoSeo + "'>" + this.LinhaDescricao + "</a></li>");
         });
 
     });
@@ -41,7 +54,7 @@ app.ObterClubesInternacionais = function () {
 
         $(data).each(function () {
            
-            $("#clubesinternacionais").append("<li><a href='/nav/times/" + this.ClubeCodigo + "/" + this.ClubeSeo + "'>" + this.Clube + "</a></li>");
+            $("#clubesinternacionais").append("<li><a href='/nav/times/" + this.LinhaCodigo + "/" + this.LinhaDescricaoSeo + "'>" + this.LinhaDescricao + "</a></li>");
         });
 
     });

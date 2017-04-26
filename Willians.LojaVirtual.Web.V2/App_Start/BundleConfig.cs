@@ -27,8 +27,8 @@ namespace Willians.LojaVirtual.Web.V2
                 "~/js/jquery.navgoco.js",
                 "~/Scripts/jquery.smartmenus.js"));
 
-            //bundles.Add(new ScriptBundle("~/Scripts/jsprojetos").Include(
-            //        "~/Scripts/menu.js"));
+            bundles.Add(new ScriptBundle("~/Scripts/jsprojetos").Include(
+                    "~/Scripts/menu.js"));
 
             BundleTable.EnableOptimizations = false;
         }
