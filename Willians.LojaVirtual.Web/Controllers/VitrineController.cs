@@ -13,30 +13,55 @@ namespace Willians.LojaVirtual.Web.Controllers
     {
         private ProdutosRepositorio _produtoRepositorio = new ProdutosRepositorio();
 
-        public int ItensPorPagina = 4;
+        public int ItensPorPagina = 12;
 
         // GET: Produtos
-        public ViewResult ListaProdutos(int pagina = 1, string categoriaSelecionada = null)
+        //public ViewResult ListaProdutos(int pagina = 1, string categoriaSelecionada = null)
+        //{
+        //    var produtos = _produtoRepositorio.Produtos
+        //                    .Where(p => (categoriaSelecionada == null || p.Categoria == categoriaSelecionada))
+        //                    .OrderBy(p => p.Descricao)
+        //                    .Skip((pagina - 1) * ItensPorPagina)
+        //                    .Take(ItensPorPagina);
+
+        //    ProdutoViewModel model = new ProdutoViewModel();
+        //    model.paginacao = new Paginacao();
+        //    model.paginacao.PaginaAtual = pagina;
+        //    model.paginacao.ItensPorPagina = ItensPorPagina;
+        //    model.paginacao.ItensTotal = _produtoRepositorio.Produtos
+        //                                    .Count(p => (categoriaSelecionada == null || p.Categoria == categoriaSelecionada));
+
+        //    model.Produtos = produtos;
+
+        //    model.CategoriaAtual = categoriaSelecionada;
+
+        //    return View(model);
+        //}
+
+        public ViewResult ListaProdutos(string categoriaSelecionada = null)
         {
-            var produtos = _produtoRepositorio.Produtos
-                            .Where(p => (categoriaSelecionada == null || p.Categoria == categoriaSelecionada))
-                            .OrderBy(p => p.Descricao)
-                            .Skip((pagina - 1) * ItensPorPagina)
-                            .Take(ItensPorPagina);
+            var model = new ProdutoViewModel();
 
-            ProdutoViewModel model = new ProdutoViewModel();
-            model.paginacao = new Paginacao();
-            model.paginacao.PaginaAtual = pagina;
-            model.paginacao.ItensPorPagina = ItensPorPagina;
-            model.paginacao.ItensTotal = _produtoRepositorio.Produtos
-                                            .Count(p => (categoriaSelecionada == null || p.Categoria == categoriaSelecionada));
+            var rnd = new Random();
 
-            model.Produtos = produtos;
-
-            model.CategoriaAtual = categoriaSelecionada;
+            if (categoriaSelecionada != null)
+                model.Produtos = _produtoRepositorio.Produtos
+                                    .Where(d => d.Categoria == categoriaSelecionada)
+                                    .OrderBy(x => rnd.Next()).ToList();
+            else
+                model.Produtos = _produtoRepositorio.Produtos
+                                    .Take(ItensPorPagina)
+                                    .OrderBy(x => rnd.Next()).ToList();
 
             return View(model);
         }
+
+        [Route("DetalhesProdutos/{id}/{produto}")]
+        public ViewResult Detalhes(int id)
+        {
+            Produto produto = _produtoRepositorio.ObterProduto(id);
+            return View(produto);
+        } 
 
         [Route("Vitrine/ObterImagem/{produtoId}")]
         public FileContentResult ObterImagem(int produtoId)

@@ -31,7 +31,7 @@ namespace Willians.LojaVirtual.Web.App_Start
                 "~/Content/bootstrap-theme.css",
                 "~/Content/ErroEstilo.css"));
 
-            BundleTable.EnableOptimizations = true;
+            BundleTable.EnableOptimizations = false;
         }            
     }
 }

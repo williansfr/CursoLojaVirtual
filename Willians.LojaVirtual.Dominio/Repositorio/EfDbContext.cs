@@ -20,6 +20,7 @@ namespace Willians.LojaVirtual.Dominio.Repositorio
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
             modelBuilder.Entity<Produto>().ToTable("Produtos");
             modelBuilder.Entity<Administrador>().ToTable("Administradores");
+            modelBuilder.Entity<Categoria>().ToTable("Categoria");
         }
     }
 }

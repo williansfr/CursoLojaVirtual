@@ -11,9 +11,9 @@ namespace Willians.LojaVirtual.Dominio.Repositorio
     {
         private readonly EfDbContext _context = new EfDbContext();
 
-        public IEnumerable<Categoria> ObterCategorias
+        public IEnumerable<Categoria> ObterCategorias()
         {
-            get { return _context.Categorias.OrderBy(c => c.CategoriaDescricao); } 
+            return _context.Categorias.OrderBy(c => c.CategoriaDescricao); 
         }
     }
 }
