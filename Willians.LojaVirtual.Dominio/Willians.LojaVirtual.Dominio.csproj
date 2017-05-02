@@ -69,6 +69,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dto\SubGrupoDto.cs" />
     <Compile Include="Entidade\Administrador.cs" />
     <Compile Include="Entidade\Categoria.cs" />
     <Compile Include="Entidade\EmailConfiguracoes.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="Entidade\Modalidade.cs" />
     <Compile Include="Entidade\Pedido.cs" />
     <Compile Include="Entidade\Produto.cs" />
+    <Compile Include="Entidade\SubGrupo.cs" />
     <Compile Include="Entidade\Vitrine\Clubes.cs" />
     <Compile Include="Entidade\Vitrine\ClubesInternacionais.cs" />
     <Compile Include="Entidade\Vitrine\ClubesNacionais.cs" />
