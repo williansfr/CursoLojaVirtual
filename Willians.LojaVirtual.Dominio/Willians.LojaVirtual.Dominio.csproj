@@ -93,6 +93,7 @@
     <Compile Include="Repositorio\AdministradoresRepositorio.cs" />
     <Compile Include="Repositorio\CategoriaRepositorio.cs" />
     <Compile Include="Repositorio\MenuRepositorio.cs" />
+    <Compile Include="Repositorio\ProdutoModeloRepositorio.cs" />
     <Compile Include="Repositorio\ProdutosRepositorio.cs" />
   </ItemGroup>
   <ItemGroup>

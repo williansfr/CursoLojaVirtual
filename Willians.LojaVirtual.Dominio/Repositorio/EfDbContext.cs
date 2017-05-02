@@ -1,4 +1,4 @@
-﻿using Quiron.LojaVirtual.Dominio.Entidades;
+﻿using Willians.LojaVirtual.Dominio.Entidades;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -25,7 +25,7 @@ namespace Willians.LojaVirtual.Dominio.Repositorio
         public DbSet<Grupo> Grupos { get; set; }
         public DbSet<Marca> Marcas { get; set; }
         public DbSet<Modalidade> Modalidades { get; set; }
-	    
+        public DbSet<ProdutoVitrine> ProdutoVitrine { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
