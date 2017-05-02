@@ -299,6 +299,7 @@
     <Content Include="Views\Shared\_Marcas.cshtml" />
     <Content Include="Views\Nav\Index.cshtml" />
     <Content Include="Views\Nav\_Nav.cshtml" />
+    <Content Include="Views\Shared\Navegacao.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
