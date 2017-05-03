@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Willians.LojaVirtual.Dominio.Dto;
 using Willians.LojaVirtual.Dominio.Entidade;
 using Willians.LojaVirtual.Dominio.Entidade.Vitrine;
+using FastMapper;
 
 namespace Willians.LojaVirtual.Dominio.Repositorio
 {
@@ -75,15 +76,47 @@ namespace Willians.LojaVirtual.Dominio.Repositorio
                             .Distinct()
                             .OrderBy(d => d.SubGrupoDescricao)
 
-                        select new SubGrupoDto
+                        select new
                         {
-                            SubGrupoCodigo = s.SubGrupoCodigo,
-                            SubGrupoDescricao = s.SubGrupoDescricao
+                            s.SubGrupoCodigo,
+                            s.SubGrupoDescricao
                         };
 
-            return query;
+                        //Auto Mapeamento FastMapper
+                        return query.Project().To<SubGrupoDto>().ToList();
+
+                        //select new SubGrupoDto
+                        //{
+                        //    SubGrupoCodigo = s.SubGrupoCodigo,
+                        //    SubGrupoDescricao = s.SubGrupoDescricao
+                        //};
+
+                        //return query;
         }
 
         #endregion Menu Casual Lateral
+
+        #region [Suplementos]
+
+        public Categoria Suplemento()
+        {
+            var categoriaSuplementos = "0008";
+
+            return _context.Categorias
+                .FirstOrDefault(s => s.CategoriaCodigo == categoriaSuplementos);
+        }
+
+        public IEnumerable<SubGrupo> ObterSuplementos()
+        {
+            var subGrupos = new[]
+            {
+                "0162","0381","0557","0564","0565","1082","1083","1084","1085", "0977"
+            };
+            return _context.SubGrupos
+                .Where(s => subGrupos.Contains(s.SubGrupoCodigo) && s.GrupoCodigo == "0012")
+                .OrderBy(s => s.SubGrupoDescricao);
+        }
+
+        #endregion
     }
 }
