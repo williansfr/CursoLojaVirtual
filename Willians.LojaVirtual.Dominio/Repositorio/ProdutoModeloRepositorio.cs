@@ -13,7 +13,7 @@ namespace Willians.LojaVirtual.Dominio.Repositorio
 
         public List<ProdutoVitrine> ObterProdutosVitrine(string categoria = null, string genero = null
            , string grupo = null, string subgrupo = null, string linha = null,
-            string marca = null, string modalidade = null)
+            string marca = null, string modalidade = null, string busca = null)
         {
             var query = from p in _context.ProdutoVitrine select p;
 
@@ -38,7 +38,8 @@ namespace Willians.LojaVirtual.Dominio.Repositorio
             if (!string.IsNullOrEmpty(modalidade))
                 query = query.Where(p => p.ModalidadeCodigo == modalidade);
 
-
+            if (!string.IsNullOrEmpty(busca))
+                query = query.Where(p => p.ProdutoDescricao.Contains(busca));
 
             query = query.OrderBy(p => Guid.NewGuid());
             query = query.Take(40);
