@@ -30,6 +30,10 @@ namespace Willians.LojaVirtual.Web.V2
             bundles.Add(new ScriptBundle("~/Scripts/jsprojetos").Include(
                     "~/Scripts/menu.js"));
 
+            bundles.Add(new ScriptBundle("~/Scripts/detalhesproduto").Include(
+                           "~/js/jquery.elevatezoom.js",
+                             "~/Scripts/detalhesProduto.js"));
+
             BundleTable.EnableOptimizations = false;
         }
     }

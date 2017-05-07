@@ -25,9 +25,20 @@
 
                     <!-- Item image -->
                     <div class="item-image">
-                        <a href="single-item.html" class="zoom">
-                            <img src="@ImageHelpers.CaminhoImagem()/180x180/@Model.Produtos[i].Imagem" alt="" class="img-responsive" />
+
+                        <a href="@Url.Action("Detalhes", "DetalhesProduto", new
+                                     {
+                                         codigo = @Model.Produtos[i].ProdutoModeloCor.Substring(0, 6),
+                                         marca = @Model.Produtos[i].MarcaDescricao.ToLower(),
+                                         produto = @Model.Produtos[i].ProdutoDescricao.ToSeoUrl(),
+                                         corCodigo = @Model.Produtos[i].ProdutoModeloCor.Substring(6)
+                                     })">
+                            <img src="@ImageHelpers.CaminhoImagem()/180x180/@Model.Produtos[i].Imagem" alt="@Model.Produtos[i].ProdutoDescricao" class="img-responsive" />
                         </a>
+                        
+                        @*<a href="single-item.html" class="zoom">
+                            <img src="@ImageHelpers.CaminhoImagem()/180x180/@Model.Produtos[i].Imagem" alt="" class="img-responsive" />
+                        </a>*@
                     </div>
                     <!-- Item details -->
 

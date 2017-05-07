@@ -59,11 +59,17 @@ namespace Willians.LojaVirtual.Dominio.Repositorio
 
             var produto = (from q in query where q.CorCodigo == corCodigo select q).First();
 
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMissingTypeMaps = true;
+                cfg.CreateMap<QuironProduto, Produto>().ReverseMap();
+            });
 
+            var mapper = config.CreateMapper();
 
             DetalhesProdutoDto dto = new DetalhesProdutoDto
             {
-                Produto = Mapper.Map<QuironProduto>(produto),
+                Produto = mapper.Map<QuironProduto>(produto),
                 Cores = cores.Select(Mapper.Map<Cor>),
                 Tamanhos = tamanhos.Select(Mapper.Map<Tamanho>)
             };
@@ -126,31 +132,31 @@ namespace Willians.LojaVirtual.Dominio.Repositorio
             return dto;
         }
 
-        //    public BreadCrumbDto ObterBreadCrumb(string produtoModeloCodigo)
-        //    {
-        //        var breadCrumb = (from p in _context.ProdutoModelo
-        //                          join g in _context.Generos on p.GeneroCodigo equals g.GeneroCodigo
-        //                          join m in _context.Marcas on p.MarcaCodigo equals m.MarcaCodigo
-        //                          join c in _context.Categorias on p.CategoriaCodigo equals c.CategoriaCodigo
-        //                          join gr in _context.Grupos on p.GrupoCodigo equals gr.GrupoCodigo
-        //                          where p.ProdutoModeloCodigo == produtoModeloCodigo
+        public BreadCrumbDto ObterBreadCrumb(string produtoModeloCodigo)
+        {
+            var breadCrumb = (from p in _context.ProdutoModelo
+                              join g in _context.Generos on p.GeneroCodigo equals g.GeneroCodigo
+                              join m in _context.Marcas on p.MarcaCodigo equals m.MarcaCodigo
+                              join c in _context.Categorias on p.CategoriaCodigo equals c.CategoriaCodigo
+                              join gr in _context.Grupos on p.GrupoCodigo equals gr.GrupoCodigo
+                              where p.ProdutoModeloCodigo == produtoModeloCodigo
 
-        //                          select new
-        //                          {
-        //                              m.MarcaCodigo,
-        //                              m.MarcaDescricao,
-        //                              p.ProdutoDescricao,
-        //                              g.GeneroCodigo,
-        //                              g.GeneroDescricao,
-        //                              c.CategoriaCodigo,
-        //                              c.CategoriaDescricao,
-        //                              gr.GrupoCodigo,
-        //                              gr.GrupoDescricao
+                              select new
+                              {
+                                  m.MarcaCodigo,
+                                  m.MarcaDescricao,
+                                  p.ProdutoDescricao,
+                                  g.GeneroCodigo,
+                                  g.GeneroDescricao,
+                                  c.CategoriaCodigo,
+                                  c.CategoriaDescricao,
+                                  gr.GrupoCodigo,
+                                  gr.GrupoDescricao
 
-        //                          }).FirstOrDefault();
+                              }).FirstOrDefault();
 
-        //        return Mapper.DynamicMap<BreadCrumbDto>(breadCrumb);
-        //    }
-        //}
+            return Mapper.Map<BreadCrumbDto>(breadCrumb);
+        }
     }
 }
+

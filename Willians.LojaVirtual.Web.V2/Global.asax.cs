@@ -16,6 +16,7 @@ namespace Willians.LojaVirtual.Web.V2
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            Mappers.AutoMapperConfig.RegisterMappings();
         }
     }
 }
